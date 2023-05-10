@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void decrypt(){
+    string encrypted_message;
+    string letters = "abcdefghijklmnopqrstuvwxyz";
+    int k;
+    string decrypted_message = "";
+
+    cout << "Enter the message i.e to be decrypted: ";
+    getline(cin, encrypted_message);
+    cout << "Enter the key to decrypt: ";
+    cin >> k;
+
+    for (char ch : encrypted_message){
+        if (letters.find(ch) != string::npos){
+            int position = letters.find(ch);
+            int new_pos = (position - k) % 26;
+            char new_char = letters[new_pos];
+            decrypted_message += new_char;
+        }
+        else{
+            decrypted_message += ch;
+        }
+    }
+    cout << "Your decrypted message is:\n" << decrypted_message << endl;
+}
+
+int main(){
+    decrypt();
+    return 0;
+}

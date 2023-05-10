@@ -1,0 +1,59 @@
+def encrypt(msg,key):
+   
+    string1="abcdefghijklmnopqrstuvwxyz"
+    string2="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    encrypted_string=""
+    for i in msg:
+        i = str(i)
+        if i==" ":
+            encrypted_string=encrypted_string+" "
+            continue
+        if i in string1:
+            val = string1.index(i)
+            val = val + key
+            val = val % 26
+            encrypted_string=encrypted_string+string1[val]
+        elif i in string2:
+            val = string2.index(i)
+            val = val + key
+            val = val % 26
+            encrypted_string=encrypted_string+string2[val]
+    print("Encrypted String :",encrypted_string)
+    return encrypted_string
+
+def decrypt(msg,key):
+    string1="abcdefghijklmnopqrstuvwxyz"
+    string2="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    decrypted_string=""
+    for i in msg:
+        i = str(i)
+        if i==" ":
+            decrypted_string=decrypted_string+" "
+            continue
+        if i in string1:
+            val = string1.index(i)
+            if val - key < 0:
+                val = 26 - (key -val)
+            else:
+                val = val - key
+            decrypted_string=decrypted_string+string1[val]
+        elif i in string2:
+            val = string2.index(i)
+            if val - key < 0:
+                val = 26 - (key -val)
+            else:
+                val = val - key
+            decrypted_string=decrypted_string+string2[val]
+    print("Decrypted String :",decrypted_string)
+    
+
+if __name__=="__main__":
+    msg = input("Message to Encrypt : ")
+    key = int(input("Enter the key : "))%26
+    encrypted_string=encrypt(msg,key)
+    string_to_decrypt=input("String to decrypt :")
+    key=int(input("Key :"))
+    decrypt(string_to_decrypt,key)
+    #decrypt(encrypted_string,key)
